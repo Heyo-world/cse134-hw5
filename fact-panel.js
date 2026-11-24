@@ -57,5 +57,16 @@ class FactPanel extends HTMLElement {
         this.status.textContent = `Fact ${this.index + 1} of ${factList.length}`;
     }
 }
+customElements.define("fact-panel", FactPanel);
 
-  customElements.define("fact-panel", FactPanel);
+document.addEventListener("DOMContentLoaded", () => {
+  const panel = document.querySelector("fact-panel");
+  const toggleBtn = document.querySelector("#show-fact");
+
+  if (panel && toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      const hasCompact = panel.toggleAttribute("compact");
+      toggleBtn.setAttribute("aria-pressed", String(hasCompact));
+    });
+  }
+});
