@@ -40,7 +40,7 @@ class FactPanel extends HTMLElement {
         this.factText.className = "fact-text";
         this.appendChild(this.factText);
 
-        this.factDetail = document.createElement("p");
+        this.factDetail = document.createElement("small");
         this.factDetail.className = "fact-detail";
         this.appendChild(this.factDetail);
 
