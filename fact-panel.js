@@ -29,7 +29,7 @@ class FactPanel extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === "compact" && this.built) {
-        this.render();
+            this.render();
         }
     }
 
@@ -47,10 +47,10 @@ class FactPanel extends HTMLElement {
         this.factDetail.className = "fact-detail";
         this.appendChild(this.factDetail);
 
-        const nextButton = document.createElement("button");
-        nextButton.type = "button";
-        nextButton.textContent = "Next fact";
-        nextButton.addEventListener("click", () => {
+        this.nextButton = document.createElement("button");
+        this.nextButton.type = "button";
+        this.nextButton.textContent = "Next fact";
+        this.nextButton.addEventListener("click", () => {
             this.loadFact();
         });
         this.appendChild(nextButton);
@@ -86,6 +86,8 @@ class FactPanel extends HTMLElement {
                 throw new Error("Expected a valid fact in the response.");
             }
 
+            this.factText.textContent = data.text;
+            this.factDetail.textContent = typeof data.source === "string" ? `Source: ${data.source}` : "Useless Facts API";
             this.currIndex++;
             this.nextButton.textContent = "Next fact";
             this.status.textContent = `Fact #${this.currIndex}`;
