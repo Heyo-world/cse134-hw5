@@ -17,7 +17,7 @@ class FactPanel extends HTMLElement {
         this.built = false;
     }
 
-    connectedCallBack(){
+    connectedCallback(){
         if (!this.built) {
             this.build();
             this.built = true;
@@ -48,7 +48,7 @@ class FactPanel extends HTMLElement {
         nextButton.type = "button";
         nextButton.textContent = "Next fact";
         nextButton.addEventListener("click", () => {
-            this.index = (this.index + 1) % factList.length;
+            this.currIndex = (this.currIndex + 1) % factList.length;
             this.render();
         });
         this.appendChild(nextButton);
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (panel && toggleBtn) {
         toggleBtn.addEventListener("click", () => {
-        panel.toggleAttribute("compact");
+            panel.toggleAttribute("compact");
         });
     }
 });
