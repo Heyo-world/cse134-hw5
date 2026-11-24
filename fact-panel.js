@@ -104,12 +104,7 @@ class FactPanel extends HTMLElement {
     }
 
     render() {
-        const fact = factList[this.currIndex];
-        this.factText.textContent = fact.text;
-        this.factDetail.textContent = fact.detail;
         this.factDetail.hidden = this.hasAttribute("compact");
-
-        this.status.textContent = `Fact ${this.currIndex + 1} of ${factList.length}`;
     }
 }
 customElements.define("fact-panel", FactPanel);
