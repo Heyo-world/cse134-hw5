@@ -1,3 +1,5 @@
+const FACT_URL = "https://uselessfacts.jsph.pl/api/v2/facts/random";
+
 const factList = [
     {text: "The fear of long words is called Hippopotomonstrosesquippedaliophobia",
      detail: "The word is a combination of 'Hippopotamus', 'Monster', and 'Phobia'",},
@@ -38,6 +40,7 @@ class FactPanel extends HTMLElement {
 
         this.factText = document.createElement("p");
         this.factText.className = "fact-text";
+        this.factText.textContent = "Press the button to load a fact.";
         this.appendChild(this.factText);
 
         this.factDetail = document.createElement("small");
@@ -48,8 +51,7 @@ class FactPanel extends HTMLElement {
         nextButton.type = "button";
         nextButton.textContent = "Next fact";
         nextButton.addEventListener("click", () => {
-            this.currIndex = (this.currIndex + 1) % factList.length;
-            this.render();
+            this.loadFact();
         });
         this.appendChild(nextButton);
 
@@ -57,7 +59,45 @@ class FactPanel extends HTMLElement {
         this.status.className = "fact-status";
         this.status.setAttribute("role", "status");
         this.status.setAttribute("aria-live", "polite");
+        this.status.textContent = "Ready.";
         this.appendChild(this.status);
+    }
+
+    async loadFact(){
+        if (this.isLoading) {
+            return;
+        }
+        this.isLoading = true;
+        this.nextButton.disabled = true;
+        this.status.textContent = "Loading a fact...";
+
+        try {
+            const response = await fetch(FACT_URL, {
+                headers: { Accept: "application/json" }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (typeof data?.text !== "string" ) {
+                throw new Error("Expected a valid fact in the response.");
+            }
+
+            this.currIndex++;
+            this.nextButton.textContent = "Next fact";
+            this.status.textContent = `Fact #${this.currIndex}`;
+            this.render();
+        } catch (error) {
+            console.error("Could not load the fact.", error);
+            this.nextButton.textContent = "Try again";
+            this.status.textContent = `Could not load a fact. Try again.`;
+        } finally {
+            this.isLoading = false;
+            this.nextButton.disabled = false;
+        }
     }
 
     render() {
