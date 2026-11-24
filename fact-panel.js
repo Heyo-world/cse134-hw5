@@ -55,6 +55,8 @@ class FactPanel extends HTMLElement {
 
         this.status = document.createElement("p");
         this.status.className = "fact-status";
+        this.status.setAttribute("role", "status");
+        this.status.setAttribute("aria-live", "polite");
         this.appendChild(this.status);
     }
 
@@ -72,11 +74,12 @@ customElements.define("fact-panel", FactPanel);
 
 document.addEventListener("DOMContentLoaded", () => {
     const panel = document.querySelector("fact-panel");
-    const toggleBtn = document.querySelector("#show-fact");
+    const toggleBtn = document.querySelector("#show-hide-detail");
 
     if (panel && toggleBtn) {
         toggleBtn.addEventListener("click", () => {
-            panel.toggleAttribute("compact");
+            const hasCompact = panel.toggleAttribute("compact");
+            toggleBtn.setAttribute("aria-pressed", String(hasCompact));
         });
     }
 });
