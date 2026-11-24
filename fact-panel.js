@@ -1,7 +1,11 @@
 const factList = [
-    {text: "The fear of long words is called Hippopotomonstrosesquippedaliophobia",},
-    {text: "Avocados are a fruit, not a vegetable",},
-    {text: "Strawberries are not berries",},
+    {text: "The fear of long words is called Hippopotomonstrosesquippedaliophobia",
+     detail: "The word is a combination of 'Hippopotamus', 'Monster', and 'Phobia'",},
+    {text: "It's illegal to own just one guinea pig in Switzerland",
+     detail: "It's considered animal abuse because they're social beings and get lonely",},
+    {text: "Strawberries are not berries",
+     detail: "Strawberries actually share the same family as roses",
+    },
 ]
 
 class FactPanel extends HTMLElement {
@@ -36,6 +40,10 @@ class FactPanel extends HTMLElement {
         this.factText.className = "fact-text";
         this.appendChild(this.factText);
 
+        this.factDetail = document.createElement("p");
+        this.factDetail.className = "fact-detail";
+        this.appendChild(this.factDetail);
+
         const nextButton = document.createElement("button");
         nextButton.type = "button";
         nextButton.textContent = "Next fact";
@@ -53,20 +61,22 @@ class FactPanel extends HTMLElement {
     render() {
         const fact = factList[this.index];
         this.factText.textContent = fact.text;
+        this.factDetail.textContent = fact.detail;
+        this.factDetail.hidden = this.hasAttribute("compact");
 
         this.status.textContent = `Fact ${this.index + 1} of ${factList.length}`;
     }
 }
 customElements.define("fact-panel", FactPanel);
 
-document.addEventListener("DOMContentLoaded", () => {
-  const panel = document.querySelector("fact-panel");
-  const toggleBtn = document.querySelector("#show-fact");
 
-  if (panel && toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-      const hasCompact = panel.toggleAttribute("compact");
-      toggleBtn.setAttribute("aria-pressed", String(hasCompact));
-    });
-  }
+document.addEventListener("DOMContentLoaded", () => {
+    const panel = document.querySelector("fact-panel");
+    const toggleBtn = document.querySelector("#show-fact");
+
+    if (panel && toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+        panel.toggleAttribute("compact");
+        });
+    }
 });
