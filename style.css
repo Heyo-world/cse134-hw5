@@ -212,3 +212,13 @@ input:user-invalid, textarea:user-invalid{
 input:user-valid, textarea:user-valid{
   background-color: #c9eba2;
 }
+
+fact-panel .fact-detail {
+  display: block;
+  margin-block: 0.5rem;
+}
+
+/* Needed: keeps compact mode working */
+fact-panel .fact-detail[hidden] {
+  display: none;
+}
