@@ -53,7 +53,7 @@ class FactPanel extends HTMLElement {
         this.nextButton.addEventListener("click", () => {
             this.loadFact();
         });
-        this.appendChild(nextButton);
+        this.appendChild(this.nextButton);
 
         this.status = document.createElement("p");
         this.status.className = "fact-status";
@@ -92,6 +92,7 @@ class FactPanel extends HTMLElement {
             this.nextButton.textContent = "Next fact";
             this.status.textContent = `Fact #${this.currIndex}`;
             this.render();
+
         } catch (error) {
             console.error("Could not load the fact.", error);
             this.nextButton.textContent = "Try again";
