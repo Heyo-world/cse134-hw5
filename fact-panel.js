@@ -1,0 +1,61 @@
+const factList = [
+    {text: "The fear of long words is called Hippopotomonstrosesquippedaliophobia",},
+    {text: "Avocados are a fruit, not a vegetable",},
+    {text: "Strawberries are not berries",},
+]
+
+class FactPanel extends HTMLElement {
+    static observedAttributes = ["compact"];
+
+    constructor() {
+        super();
+        this.currIndex = 0;
+        this.built = false;
+    }
+
+    connectedCallBack(){
+        if (!this.built) {
+            this.build();
+            this.built = true;
+        }
+        this.render();
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === "compact" && this.built) {
+        this.render();
+        }
+    }
+
+    build() {
+        const heading = document.createElement("h3");
+        heading.textContent = "Fun facts";
+        this.appendChild(heading);
+
+        this.factText = document.createElement("p");
+        this.factText.className = "fact-text";
+        this.appendChild(this.factText);
+
+        const nextButton = document.createElement("button");
+        nextButton.type = "button";
+        nextButton.textContent = "Next fact";
+        nextButton.addEventListener("click", () => {
+            this.index = (this.index + 1) % factList.length;
+            this.render();
+        });
+        this.appendChild(nextButton);
+
+        this.status = document.createElement("p");
+        this.status.className = "fact-status";
+        this.appendChild(this.status);
+    }
+
+    render() {
+        const fact = factList[this.index];
+        this.factText.textContent = fact.text;
+
+        this.status.textContent = `Fact ${this.index + 1} of ${factList.length}`;
+    }
+}
+
+  customElements.define("fact-panel", FactPanel);
