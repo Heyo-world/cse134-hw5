@@ -213,6 +213,34 @@ input:user-valid, textarea:user-valid{
   background-color: #c9eba2;
 }
 
+/* Portfolio stylesheet: pass theme values to fact-panel */
+fact-panel {
+  --panel-bg: var(--card-color, #154675);
+  --panel-fc: var(--font-color, white);
+  --panel-border: var(--accent-color, #ffa182);
+  --panel-padding: 1rem 1.25rem;
+}
+
+[data-theme="light"] fact-panel {
+  --panel-bg: var(--card-color, #87c0eb);
+  --panel-fc: var(--font-color, #083159);
+  --panel-border: var(--accent-color, #e06262);
+}
+
+/* Component appearance using custom properties + fallbacks */
+fact-panel {
+  display: block;
+  background-color: var(--panel-bg, #154675);
+  color: var(--panel-fg, white);
+  border: 1px solid var(--panel-border, #ffa182);
+  border-radius: 6px;
+  padding: var(--panel-padding, 1rem 1.25rem);
+}
+
+fact-panel[compact] {
+  --panel-padding: 0.6rem 0.9rem;
+}
+
 fact-panel .fact-detail {
   display: block;
   margin-block: 0.5rem;
