@@ -239,11 +239,7 @@ fact-panel {
   margin: var(--panel-margin, 0.5rem);
 }
 
-fact-panel[compact] {
-  --panel-padding: 0.6rem 0.9rem;
-}
-
-fact-panel .fact-detail {
+fact-panel .fact-detail{
   display: block;
   margin-block: 0.5rem;
 }

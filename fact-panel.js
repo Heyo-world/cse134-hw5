@@ -1,5 +1,7 @@
 const FACT_URL = "https://uselessfacts.jsph.pl/api/v2/facts/random";
 
+/*
+Left over from part 1
 const factList = [
     {text: "The fear of long words is called Hippopotomonstrosesquippedaliophobia",
      detail: "The word is a combination of 'Hippopotamus', 'Monster', and 'Phobia'",},
@@ -9,6 +11,7 @@ const factList = [
      detail: "Strawberries actually share the same family as roses",
     },
 ]
+*/
 
 class FactPanel extends HTMLElement {
     static observedAttributes = ["compact"];
