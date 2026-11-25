@@ -20,7 +20,7 @@
 
 [data-theme="light"]{
     --bg-color: #a6d9ff;
-    --card-color: #7fbceb;
+    --card-color: #8ec3ef;
     --accent-color: #e45858;
     --font-color: #083159;
     --link-color: #5b5dda;
@@ -223,9 +223,9 @@ fact-panel {
 }
 
 [data-theme="light"] fact-panel {
-  --panel-bg: var(--card-color, #87c0eb);
+  --panel-bg: var(--card-color, #8ec3ef);
   --panel-fc: var(--font-color, #083159);
-  --panel-border: var(--accent-color, #e06262);
+  --panel-border: var(--accent-color, #e45858);
 }
 
 /* Component appearance using custom properties + fallbacks */
