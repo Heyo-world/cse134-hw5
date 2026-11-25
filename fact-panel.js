@@ -127,7 +127,7 @@ function readCompactMode(){
 
 function saveCompactMode(isCompact){
     try{
-        localStorage.setItem(MODE_KEY, isCompact);
+        localStorage.setItem(MODE_KEY, String(Boolean(isCompact)));
     }
     catch(error){
         console.warn("Couldn't save preference. ", error);
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (panel && toggleBtn) {
         const initialMode = readCompactMode();
-        panel.toggleAttribute(initialMode);
+        panel.toggleAttribute("compact", initialMode);
         toggleBtn.setAttribute("aria-pressed", String(initialMode));
 
         toggleBtn.addEventListener("click", () => {
