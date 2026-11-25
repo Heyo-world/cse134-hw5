@@ -1,0 +1,250 @@
+@view-transition {
+    navigation: auto;
+}
+
+/* Dark theme */
+:root{
+    --bg-color: #083159;
+    --card-color: #154675;
+    --accent-color: #ffa182;
+    --font-color: white;
+    --link-color: #8485fe;
+    --font-stack: Georgia, serif;
+    --hint-color: lightgray;
+    --max-width: 65rem;
+
+    --keyword-lang: #49a9fc;
+    --keyword-technical: #8eff69;
+    --keyword-soft: #c67aff;
+}
+
+[data-theme="light"]{
+    --bg-color: #a6d9ff;
+    --card-color: #8ec7f5;
+    --accent-color: #ff1111;
+    --font-color: #083159;
+    --link-color: #5b5dda;
+    --font-stack: Georgia, serif;
+    --hint-color: #2b3f51;
+    --max-width: 65rem;
+
+    --keyword-lang: #0172c2;
+    --keyword-technical: #298504;
+    --keyword-soft: #6d21af;
+}
+
+body{
+    font-family: var(--font-stack);
+    color: var(--font-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  background-color: var(--card-color);
+  border: 1px solid var(--accent-color);
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+
+header-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  font-size: 3rem;
+  color: var(--accent-color);
+  margin: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-top: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+}
+
+button{
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-family: var(--font-stack);
+  border: 1px solid var(--accent-color);
+  padding: 4px;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  margin: 1rem 0 0 0;
+}
+nav a {
+  color: var(--accent-color);
+  font-weight: 600;
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+}
+
+hr{
+  border: none;
+    height: 1px;
+    background-color: var(--font-color);
+}
+
+project-card{
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  background-color: var(--card-color);
+  border: 1px solid var(--accent-color);
+  width: 90%;
+  max-width: 55rem;
+  margin: 1rem;
+  box-sizing: border-box;
+}
+
+/* Keyword color helper classes replacing inline styles */
+.keyword-lang { color: var(--keyword-lang) }
+.keyword-technical { color: var(--keyword-technical) }
+.keyword-soft { color: var(--keyword-soft); }
+
+contact-grid{
+  display: grid;
+  grid: 150px / auto auto auto;
+  grid-gap: 10px;
+  margin-bottom: 40px;
+  padding: 10px;
+}
+
+fieldset{
+    min-width: 0; 
+    max-width: 60rem; 
+    width: 100%;
+    margin: 15px;
+    border: 2px solid var(--font-color);
+}
+textarea{
+    min-width: 0; 
+    max-width: 40rem; 
+    width: 100%;
+}
+
+/*Attribute selector*/
+/*Targets links pointing to external domains */
+a[target="_blank"] {
+  color: var(--link-color);
+  font-style: italic;
+}
+/*Combinator 1*/
+/*Targets the contact logos and description in contact.html*/
+contact-grid > div {
+  text-align: center;
+  padding: 20px 0;
+}
+
+/*Combinator 2*/
+/*Targets the project details in the index.html's Featured Projects articles*/
+article > p {
+  padding-left: 20px;
+}
+
+h3 > a {
+    color: var(--link-color);
+}
+
+a:hover, button:hover {
+  color: var(--font-color);
+  background-color: var(--card-color);
+}
+
+a:focus, input:focus, textarea:focus, button:focus, select:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+footer{
+  text-align: right;
+  padding: 0.5rem;
+  font: var(--font-stack);
+  color: var(--font-color);
+  border-top: 2px solid var(--accent-color);  
+}
+
+/* Responsive Media Query for narrow screens (~375px) */
+@media (max-width: 768px) {
+  body {
+    padding: 0.75rem;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*  For HW4's form-no-js.html */
+small{
+  color: var(--hint-color);
+  font-style: italic;
+}
+
+input:required, textarea:required {
+  font-weight: bold;
+}
+
+input:user-invalid, textarea:user-invalid{
+  background-color: #e07967;
+}
+
+input:user-valid, textarea:user-valid{
+  background-color: #c9eba2;
+}
+
+/* Portfolio stylesheet: pass theme values to fact-panel */
+fact-panel {
+  --panel-bg: var(--card-color, #154675);
+  --panel-fc: var(--font-color, white);
+  --panel-border: var(--accent-color, #ffa182);
+  --panel-padding: 1rem;
+  --panel-margin: 0.5rem;
+}
+
+[data-theme="light"] fact-panel {
+  --panel-bg: var(--card-color, #8ec7f5);
+  --panel-fc: var(--font-color, #083159);
+  --panel-border: var(--accent-color, #ff1111);
+}
+
+/* Component appearance using custom properties + fallbacks */
+fact-panel {
+  display: block;
+  background-color: var(--panel-bg, #154675);
+  color: var(--panel-fc, white);
+  border: 1px solid var(--panel-border, #ffa182);
+  border-radius: 6px;
+  padding: var(--panel-padding, 1rem);
+  margin: var(--panel-margin, 0.5rem);
+}
+
+fact-panel .fact-detail{
+  display: block;
+  margin-block: 0.5rem;
+}
+
+fact-panel .fact-detail[hidden],
+fact-panel .fact-detail:empty {
+  display: none;
+}

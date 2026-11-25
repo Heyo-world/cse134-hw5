@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js" defer></script>
+</head>
+<body>
+  <header>
+    <header-top>
+      <h1>Portfolio</h1>
+      <button id="theme-toggle" aria-label="Switch between light and dark themes" style="display:none;">&#127767; Theme</button>
+    </header-top>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <hr>
+  <main>
+    {{ content | safe }}
+  </main>
+  <footer>
+    <p>Shared footer for Homework 5 SSG exercise (Tested)</p>
+  </footer>
+</body>
+</html>
