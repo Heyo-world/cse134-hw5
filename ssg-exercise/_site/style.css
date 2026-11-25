@@ -21,7 +21,7 @@
 [data-theme="light"]{
     --bg-color: #a6d9ff;
     --card-color: #8ec7f5;
-    --accent-color: #ff1111;
+    --accent-color: #dd1111;
     --font-color: #083159;
     --link-color: #5b5dda;
     --font-stack: Georgia, serif;
@@ -225,7 +225,7 @@ fact-panel {
 [data-theme="light"] fact-panel {
   --panel-bg: var(--card-color, #8ec7f5);
   --panel-fc: var(--font-color, #083159);
-  --panel-border: var(--accent-color, #ff1111);
+  --panel-border: var(--accent-color, #dd1111);
 }
 
 /* Component appearance using custom properties + fallbacks */
