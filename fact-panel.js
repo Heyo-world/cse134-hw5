@@ -71,6 +71,7 @@ class FactPanel extends HTMLElement {
             return;
         }
         this.isLoading = true;
+        const hadFocus = document.activeElement === this.nextButton;
         this.nextButton.disabled = true;
         this.status.textContent = "Loading a fact...";
 
@@ -102,6 +103,9 @@ class FactPanel extends HTMLElement {
             this.status.textContent = `Could not load a fact. Try again.`;
         } finally {
             this.isLoading = false;
+            if (hadFocus) {
+                this.nextButton.focus();
+            }
             this.nextButton.disabled = false;
         }
     }

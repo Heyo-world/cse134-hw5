@@ -1,26 +1,29 @@
-## Setup & Commands
+## SSG Exercise (Eleventy)
 
-**Initialize and install Eleventy** (from inside `ssg-exercise/`):
-   npm init -y
-   npm install @11ty/eleventy
+The path to the SSG exercise folder is `ssg-exercise/` (with source templates in `ssg-exercise/src/` and configuration in `ssg-exercise/eleventy.config.js`)
+The two pages to preview are Home (`/index.html`) and About (`/about.html`).
+Read `ssg-exercise/README.md` for further instructions.
 
-**Build the site**
-npx @11ty/eleventy
+## `<fact-panel>` Design Note
 
-The output might look like this:
-[11ty] Writing ./_site/about.html from ./src/about.njk
-[11ty] Writing ./_site/index.html from ./src/index.njk
-[11ty] Copied 13 Wrote 2 files in 0.09 seconds (v3.1.8)
+A visitor wants to read an interesting fact, and read another one when they are done. The visitor also wants choose if they want to read the fact by itself, or the fact with its source. They should be able to do all of that without the page reloading, and they should always be able to tell whether the panel is working, finished, or stuck.
 
-**Preview both pages**
-npx @11ty/eleventy --serve
+**Action** 
+Clicking the "Next fact" button inside `<fact-panel>` triggers a fetch request to the Useless Facts API throught `loadFact()`. After the click, `loadFact()` first returns early if a request is already running. Then it disables the button and sets the status line to "Loading a fact...". 
 
-The output might look like this:
-[11ty] Writing ./_site/about.html from ./src/about.njk
-[11ty] Writing ./_site/index.html from ./src/index.njk
-[11ty] Copied 13 Wrote 2 files in 0.08 seconds (v3.1.8)
-[11ty] Watching…
-[11ty] Server at http://localhost:8080/
+The component then sends a `GET` request with `fetch()` to `https://uselessfacts.jsph.pl/api/v2/facts/random`, asking for JSON. When it receives a response, it checks `response.ok`, parses the JSON, and confirms the `text` field is a non-empty string. Any problem throws an error, which jumps to the `catch` block. 
 
-Open the local URL shown in the terminal and visit both /index.html (Home) and /about.html (About) to verify each page's main content and the shared footer.
+On success the component sets `factText.textContent` to the text from the random fact endpoint, and `factDetail.textContent` to the source. The status line then reads "Fact #[currIndex] loaded."
+
+Lastly, a `finally` block always re-enables the button, whether the request succeeded or failed. If the button had keyboard focus, focus is returned to it, since a disabled button loses focus.
+
+
+
+### What the visitor sees
+ 
+- **While waiting:** the status line says "Loading a fact..." and the button is disabled so the request can't be sent twice. The previous fact stays on screen.
+- **On success:** the new fact and its source replace the old ones, and the status line shows "Fact #N". The status element has `role="status"` and `aria-live="polite"`, so screen readers announce each message without interrupting.
+- **On failure:** the previous fact stays visible, the status line says "Could not load a fact. Try again.", and the button label changes to "Try again". Pressing it repeats the same steps with no page reload. A successful retry replaces the error message with the new fact's status and restores the "Next fact" label. The rest of the portfolio keeps working throughout.
+
+ 
 
