@@ -218,7 +218,8 @@ fact-panel {
   --panel-bg: var(--card-color, #154675);
   --panel-fc: var(--font-color, white);
   --panel-border: var(--accent-color, #ffa182);
-  --panel-padding: 1rem 1.25rem;
+  --panel-padding: 1rem;
+  --panel-margin: 0.5rem;
 }
 
 [data-theme="light"] fact-panel {
