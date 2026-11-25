@@ -235,7 +235,8 @@ fact-panel {
   color: var(--panel-fc, white);
   border: 1px solid var(--panel-border, #ffa182);
   border-radius: 6px;
-  padding: var(--panel-padding, 1rem 1.25rem);
+  padding: var(--panel-padding, 1rem);
+  margin: var(--panel-margin, 0.5rem);
 }
 
 fact-panel[compact] {
